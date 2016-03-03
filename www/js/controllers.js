@@ -1,1 +1,1 @@
-angular.module("myApp.controllers", ["ionic"]);
+angular.module("myApp.controllers", ["ionic", "myApp.factories"]);
