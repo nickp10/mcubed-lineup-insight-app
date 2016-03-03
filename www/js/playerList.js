@@ -1,10 +1,11 @@
 angular
 	.module("myApp.controllers")
-	.controller("playerList", ["$scope", "$stateParams", "services", function($scope, $stateParams, services) {
+	.controller("playerList", ["$location", "$scope", "$stateParams", "services", function($location, $scope, $stateParams, services) {
+		$scope.contestID = $stateParams.contestID;
 		$scope.players = [];
 		services.getContests()
 			.success(function(data) {
-				var contest = data.find(function(c) { return c.ID === $stateParams.contestID; });
+				var contest = data.find(function(c) { return c.ID === $scope.contestID; });
 				if (contest) {
 					var players = contest.players.filter(function(p) { return p.position === $stateParams.position });
 					players.sort(function(p1, p2) {
@@ -13,4 +14,8 @@ angular
 					$scope.players = players;
 				}
 			});
+
+		$scope.showPlayerCard = function(player) {
+			$location.path("/player/" + $scope.contestID + "/" + player.ID);
+		};
 	}]);

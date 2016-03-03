@@ -1,6 +1,6 @@
 <ion-view cache-view="false">
 	<ion-content>
-		<div ng-repeat="player in players" class="playerBlock">
+		<div ng-repeat="player in players" class="playerBlock" ng-click="showPlayerCard(player)">
 			<div class="playerName">{{player.name}}</div>
 			<div class="playerNumbers">
 				<div class="salary">${{player.salary | number:0}}</div>

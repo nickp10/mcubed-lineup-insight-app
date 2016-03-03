@@ -7,6 +7,11 @@ angular
 				templateUrl: "pages/contests.html",
 				controller: "contests"
 			})
+			.state("playerCard", {
+				url: "/player/:contestID/:playerID",
+				templateUrl: "pages/playerCard.html",
+				controller: "playerCard"
+			})
 			.state("players", {
 				url: "/players/:contestID",
 				templateUrl: "pages/players.html",

@@ -1,8 +1,11 @@
 <ion-view cache-view="false">
 	<ion-content>
-		<div ng-repeat="contest in contests">
-			<div>{{contest.sport}} {{contest.contestType}} {{contest.label}}</div>
-			<a href="#/players/{{contest.ID}}">View Players</a>
+		<div ng-repeat="contest in contests" class="contestBlock" ng-click="showPlayers(contest)">
+			<div class="contestTitle">{{contest.sport}} {{contest.contestType}} {{contest.label}}</div>
+			<div class="contestDateTime">
+				<div class="time">{{contest.startTime | date:'h:mma'}}</div>
+				<div class="date">{{contest.startTime | date:'MMM d'}}</div>
+			</div>
 		</div>
 	</ion-content>
 </ion-view>
