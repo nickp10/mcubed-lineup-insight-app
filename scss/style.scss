@@ -1,5 +1,6 @@
-.playerBlock {
+.contestBlock, .playerBlock {
 	border: 1px solid black;
+	cursor: pointer;
 	display: table;
 	font-size: 18px;
 	margin: 5px auto;
@@ -7,9 +8,19 @@
 	width: 99%;
 }
 
-.playerName {
+.contestTitle, .playerName {
 	display: table-cell;
 	vertical-align: middle;
+}
+
+.contestDateTime {
+	display: table-cell;
+	text-align: right;
+	vertical-align: middle;
+
+	.time {
+		font-weight: bold;
+	}
 }
 
 .playerNumbers {
