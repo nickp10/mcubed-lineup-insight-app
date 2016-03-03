@@ -1,7 +1,18 @@
-<ion-view>
+<ion-view cache-view="false">
 	<ion-content>
-		<div ng-repeat="player in players">
-			<div>{{player.name}}</div>
+		<div ng-repeat="player in players" class="playerBlock">
+			<div class="playerName">{{player.name}}</div>
+			<div class="playerNumbers">
+				<div class="salary">${{player.salary | number:0}}</div>
+				<div class="projection">
+					<label>Proj.</label>
+					<span>{{player.projectedPoints | number:2}}</span>
+				</div>
+				<div class="pointsPerDollar">
+					<label>P/$</label>
+					<span>{{player.projectedPointsPerDollar | number:2}}</span>
+				</div>
+			</div>
 		</div>
 	</ion-content>
 </ion-view>

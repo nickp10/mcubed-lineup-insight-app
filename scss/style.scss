@@ -1,0 +1,27 @@
+.playerBlock {
+	border: 1px solid black;
+	display: table;
+	font-size: 18px;
+	margin: 5px auto;
+	padding: 5px 10px;
+	width: 99%;
+}
+
+.playerName {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.playerNumbers {
+	display: table-cell;
+	text-align: right;
+	vertical-align: middle;
+
+	label {
+		font-size: 12px;
+	}
+
+	.salary {
+		font-weight: bold;
+	}
+}

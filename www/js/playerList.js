@@ -6,7 +6,11 @@ angular
 			.success(function(data) {
 				var contest = data.find(function(c) { return c.ID === $stateParams.contestID; });
 				if (contest) {
-					$scope.players = contest.players.filter(function(p) { return p.position === $stateParams.position });
+					var players = contest.players.filter(function(p) { return p.position === $stateParams.position });
+					players.sort(function(p1, p2) {
+						return p2.salary - p1.salary;
+					});
+					$scope.players = players;
 				}
 			});
 	}]);

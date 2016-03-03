@@ -1,22 +1,19 @@
-<ion-view>
+<ion-view cache-view="false">
 	<ion-tabs class="tabs-positive">
-		<!--<ion-tab ng-repeat="group in playersGrouped" title="{{group.position}}" href="#/players/{{contestID}}/list/{{group.position}}">
-			<ion-nav-view name="list"></ion-nav-view>
-		</ion-tab>-->
 		<ion-tab ng-if="playersGrouped.length > 0" title="{{playersGrouped[0].position}}" href="#/players/{{contestID}}/list1/{{playersGrouped[0].position}}">
-			<ion-nav-view name="list1"></ion-nav-view>
+			<ion-nav-view name="list1" cache-view="false"></ion-nav-view>
 		</ion-tab>
 		<ion-tab ng-if="playersGrouped.length > 1" title="{{playersGrouped[1].position}}" href="#/players/{{contestID}}/list2/{{playersGrouped[1].position}}">
-			<ion-nav-view name="list2"></ion-nav-view>
+			<ion-nav-view name="list2" cache-view="false"></ion-nav-view>
 		</ion-tab>
 		<ion-tab ng-if="playersGrouped.length > 2" title="{{playersGrouped[2].position}}" href="#/players/{{contestID}}/list3/{{playersGrouped[2].position}}">
-			<ion-nav-view name="list3"></ion-nav-view>
+			<ion-nav-view name="list3" cache-view="false"></ion-nav-view>
 		</ion-tab>
 		<ion-tab ng-if="playersGrouped.length > 3" title="{{playersGrouped[3].position}}" href="#/players/{{contestID}}/list4/{{playersGrouped[3].position}}">
-			<ion-nav-view name="list4"></ion-nav-view>
+			<ion-nav-view name="list4" cache-view="false"></ion-nav-view>
 		</ion-tab>
 		<ion-tab ng-if="playersGrouped.length > 4" title="{{playersGrouped[4].position}}" href="#/players/{{contestID}}/list5/{{playersGrouped[4].position}}">
-			<ion-nav-view name="list5"></ion-nav-view>
+			<ion-nav-view name="list5" cache-view="false"></ion-nav-view>
 		</ion-tab>
 	</ion-tabs>
 </ion-view>
