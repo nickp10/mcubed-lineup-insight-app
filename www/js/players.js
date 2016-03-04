@@ -19,8 +19,18 @@ angular
 						}
 						group.players.push(player);
 					});
-					$scope.playersGrouped = Object.keys(groups).map(function(key) { return groups[key]; });
-					$timeout(function() { $ionicTabsDelegate.select(0); });
+					var playersGrouped = Object.keys(groups).map(function(key) { return groups[key]; });
+					playersGrouped.sort(function(g1, g2) {
+						var i1 = contest.positions.indexOf(g1.position);
+						var i2 = contest.positions.indexOf(g2.position);
+						return i1 - i2;
+					});
+					$scope.playersGrouped = playersGrouped;
+					$timeout(function() {
+						if ($ionicTabsDelegate.selectedIndex() < 0) {
+							$ionicTabsDelegate.select(0);
+						}
+					});
 				}
 			});
 	}]);

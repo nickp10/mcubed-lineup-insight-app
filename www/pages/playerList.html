@@ -6,10 +6,10 @@
 				<div class="border" ng-class="{recent: player.newsStatus === 'Breaking'}"><span>&equiv;</span></div>
 			</div><!--
             --><div class="playerStarting" ng-show="player.playing">
-				<div class="border">{{formatStartingDisplay(player)}}</div>
+				<div class="border"><span>{{formatStartingDisplay(player)}}</span></div>
 			</div><!--
             --><div class="playerInjury" ng-show="player.injury !== undefined">
-				<div class="border" ng-class="{out: player.injury.injuryType === 'Out', possible: player.injury.injuryType === 'Possible', probable: player.injury.injuryType === 'Probable'}">{{player.injury.display}}</div>
+				<div class="border" ng-class="{out: player.injury.injuryType === 'Out', possible: player.injury.injuryType === 'Possible', probable: player.injury.injuryType === 'Probable'}"><span>{{player.injury.display}}</span></div>
 			</div>
 			<div class="playerNumbers">
 				<div class="salary">${{player.salary | number:0}}</div>

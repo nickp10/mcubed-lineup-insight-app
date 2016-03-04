@@ -8,6 +8,13 @@ angular
 			});
 
 		$scope.showPlayers = function(contest) {
-			$location.path("/players/" + contest.ID);
+			$location.path("/players/" + contest.ID + "/list1/" + contest.positions[0]);
 		};
+		$scope.formatTitle = function(contest) {
+			var title = contest.sport + "&nbsp;" + contest.contestType;
+			if (contest.label) {
+				title += "&nbsp;" + contest.label.replace(/\-/g, "&#8209;");    
+			}
+			return title;
+		}
 	}]);

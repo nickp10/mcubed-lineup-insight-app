@@ -1,10 +1,23 @@
 <ion-view cache-view="false">
 	<ion-content>
-		<div ng-repeat="article in playerCard.news" class="playerCardNews">
-			<div class="date">{{article.date | date:'MM/dd/yy hh:mma'}}</div>
-			<div>{{article.summary}}</div>
-			<div>{{article.text}}</div>
-			<br />
+		<div class="playerCard">
+			<table class="playerCardGamelog">
+				<tr>
+					<th>Date</th>
+					<th>Opponent</th>
+					<th>Points</th>
+				</tr>
+				<tr ng-repeat="game in playerCard.gamelog">
+					<td>{{game.date}}</td>
+					<td>{{game.opponent}}</td>
+					<td>{{game.points}}</td>
+				</tr>
+			</table>
+			<div ng-repeat="article in playerCard.news" class="playerCardNews">
+				<div class="date">{{article.date | date:'MM/dd/yy hh:mma'}}</div>
+				<div>{{article.summary}}</div>
+				<div>{{article.text}}</div>
+			</div>
 		</div>
 	</ion-content>
 </ion-view>
