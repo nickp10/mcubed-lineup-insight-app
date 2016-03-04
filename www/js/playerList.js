@@ -18,4 +18,10 @@ angular
 		$scope.showPlayerCard = function(player) {
 			$location.path("/player/" + $scope.contestID + "/" + player.ID);
 		};
+		$scope.formatName = function(name) {
+			return name.replace(" ", "&nbsp;").replace("-", "&#8209;");  
+		};
+		$scope.formatStartingDisplay = function(player) {
+			return player.battingOrder === "NA" ? "S" : player.battingOrder;
+		};
 	}]);

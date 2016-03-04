@@ -8,15 +8,66 @@
 	width: 99%;
 }
 
-.contestTitle, .playerName {
-	display: table-cell;
-	vertical-align: middle;
+@mixin cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.contestTitle, .playerName, .playerNews, .playerStarting, .playerInjury {
+	@include cell;
+    width: 1px;
+}
+
+.playerNews .border {
+    border: 1px solid black;
+	font-size: 12px;
+	line-height: 10px;
+	margin-left: 5px;
+	text-align: center;
+
+	&.recent {
+		background-color: yellow;
+	}
+
+	span {
+		position: relative;
+		top: -1px;
+	}
+}
+
+.playerStarting .border {
+	background-color: #53A31A;
+	color: white;
+	font-size: 10px;
+	line-height: 10px;
+	margin-left: 5px;
+	padding: 1px 2px;
+}
+
+.playerInjury .border {
+	border: 1px solid transparent;
+	font-size: 10px;
+	line-height: 10px;
+	margin-left: 5px;
+	padding: 0 1px;
+
+	&.out {
+		border-color: #9B1010;
+		color: #9B1010;
+	}
+	&.possible {
+		border-color: #EB8500;
+		color: #EB8500;
+	}
+	&.probable {
+		border-color: #53A31A;
+		color: #53A31A;
+	}
 }
 
 .contestDateTime {
-	display: table-cell;
+    @include cell;
 	text-align: right;
-	vertical-align: middle;
 
 	.time {
 		font-weight: bold;
@@ -24,15 +75,20 @@
 }
 
 .playerNumbers {
-	display: table-cell;
+    @include cell;
 	text-align: right;
-	vertical-align: middle;
 
 	label {
 		font-size: 12px;
 	}
 
 	.salary {
+		font-weight: bold;
+	}
+}
+
+.playerCardNews {
+	.date {
 		font-weight: bold;
 	}
 }

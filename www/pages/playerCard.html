@@ -1,7 +1,7 @@
 <ion-view cache-view="false">
 	<ion-content>
-		<div ng-repeat="article in playerCard.news">
-			<div>{{article.date}}</div>
+		<div ng-repeat="article in playerCard.news" class="playerCardNews">
+			<div class="date">{{article.date | date:'MM/dd/yy hh:mma'}}</div>
 			<div>{{article.summary}}</div>
 			<div>{{article.text}}</div>
 			<br />
