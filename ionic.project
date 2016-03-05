@@ -1,5 +1,5 @@
 {
-  "name": "DFSStats",
+  "name": "dfsstats",
   "app_id": "",
   "gulpStartupTasks": [
     "sass",

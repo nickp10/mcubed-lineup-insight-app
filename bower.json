@@ -1,7 +1,9 @@
 {
-	"name": "dfsstats",
-	"private": true,
-	"devDependencies": {
-		"ionic": "driftyco/ionic-bower#1.2.4"
-	}
+  "name": "dfsstats",
+  "private": true,
+  "dependencies": {
+    "domReady": "requirejs-domready#^2.0.1",
+    "ionic": "driftyco/ionic-bower#1.2.4",
+    "requirejs": "^2.1.22"
+  }
 }

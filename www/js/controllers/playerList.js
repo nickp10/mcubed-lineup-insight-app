@@ -1,6 +1,5 @@
-angular
-	.module("myApp.controllers")
-	.controller("playerList", ["$location", "$scope", "$stateParams", "services", function($location, $scope, $stateParams, services) {
+define(['./module'], function (controllers) {
+	controllers.controller("playerList", ["$location", "$scope", "$stateParams", "services", function($location, $scope, $stateParams, services) {
 		$scope.contestID = $stateParams.contestID;
 		$scope.players = [];
 		services.getContests()
@@ -25,3 +24,4 @@ angular
 			return player.battingOrder === "NA" ? "S" : player.battingOrder;
 		};
 	}]);
+});

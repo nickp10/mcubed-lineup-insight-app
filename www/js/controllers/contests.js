@@ -1,6 +1,5 @@
-angular
-	.module("myApp.controllers")
-	.controller("contests", ["$location", "$scope", "services", function($location, $scope, services) {
+define(['./module'], function (controllers) {
+	controllers.controller("contests", ["$location", "$scope", "services", function($location, $scope, services) {
 		$scope.contests = [];
 		services.getContests()
 			.success(function(data) {
@@ -18,3 +17,4 @@ angular
 			return title;
 		}
 	}]);
+});

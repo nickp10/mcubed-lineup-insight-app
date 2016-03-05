@@ -1,6 +1,5 @@
-angular
-	.module("myApp.controllers")
-	.controller("playerCard", ["$scope", "$stateParams", "services", function($scope, $stateParams, services) {
+define(['./module'], function (controllers) {
+	controllers.controller("playerCard", ["$scope", "$stateParams", "services", function($scope, $stateParams, services) {
 		$scope.contestID = $stateParams.contestID;
 		$scope.playerID = $stateParams.playerID;
 		services.getPlayerCard($scope.contestID, $scope.playerID)
@@ -8,3 +7,4 @@ angular
 				$scope.playerCard = data;
 			});
 	}]);
+});

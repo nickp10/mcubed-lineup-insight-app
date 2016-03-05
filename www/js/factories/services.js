@@ -1,9 +1,8 @@
-angular
-	.module("myApp.factories", ["ionic"])
-	.factory("services", ["$http", function($http) {
+define(['./module'], function (factories) {
+	factories.factory("services", ["$http", function($http) {
 		var baseURL = "http://mCubed.ddns.net/mCubedServices/";
 		var data = { };
-		
+
 		return {
 			getContests: function() {
 				if (!data.contests) {
@@ -16,3 +15,4 @@ angular
 			}
 		};
 	}]);
+});

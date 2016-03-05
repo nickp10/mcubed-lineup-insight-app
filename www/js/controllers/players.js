@@ -1,6 +1,5 @@
-angular
-	.module("myApp.controllers")
-	.controller("players", ["$scope", "$ionicTabsDelegate", "$stateParams", "$timeout", "services", function($scope, $ionicTabsDelegate, $stateParams, $timeout, services) {
+define(['./module'], function (controllers) {
+	controllers.controller("players", ["$scope", "$ionicTabsDelegate", "$stateParams", "$timeout", "services", function($scope, $ionicTabsDelegate, $stateParams, $timeout, services) {
 		$scope.contestID = $stateParams.contestID;
 		$scope.playersGrouped = [];
 		services.getContests()
@@ -34,3 +33,4 @@ angular
 				}
 			});
 	}]);
+});
