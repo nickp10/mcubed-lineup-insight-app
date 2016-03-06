@@ -1,3 +1,5 @@
+/// <reference path="./lib/require.d.ts" />
+
 require.config({
 	paths: {
 		angular: "../lib/ionic/js/ionic.bundle.min",

@@ -2,6 +2,7 @@
   "name": "dfsstats",
   "app_id": "",
   "gulpStartupTasks": [
+    "compile",
     "sass",
     "watch"
   ],
