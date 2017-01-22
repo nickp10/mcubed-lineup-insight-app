@@ -1,12 +1,13 @@
-# mCubed: DFS Stats
+# mCubed Lineup Insight
 
-## Setup
+Description
+----
+This application will be used to organize fantasy sports data. In particular, this will display data such as starting players, projected points, and recent performances for daily fantasy sports sites like DraftKings, FanDuel, and Yahoo.
 
-1. Install Node.js
-	* Manual install: http://www.nodejs.org
-	* Chocolatey: `choco install nodejs.install`
-1. Install the required global node mudles: `npm install -g cordova ionic gulp bower`
+Developer Setup
+----
+1. Use `git clone` to clone the GitHub repository
+1. Install the required global node mudles: `npm install -g cordova ionic`
 1. Install the project specific node modules: `npm install`
-1. Install the plugins for ionic: `ionic state reset`
-1. Install the bower dependencies: `bower install`
+1. Install the plugins for ionic: `ionic state restore`
 1. Start the ionic server: `ionic serve` or `ionic serve --lab`
