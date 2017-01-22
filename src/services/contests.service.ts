@@ -10,7 +10,7 @@ interface IContestsCache {
 
 @Injectable()
 export class ContestsService {
-	baseURL = "http://localhost:8080/mCubedServices/";
+	baseURL = "http://mcubed.ddns.net/mCubedServices/";
 	cache: IContestsCache = { };
 
 	constructor(private http: Http) {
