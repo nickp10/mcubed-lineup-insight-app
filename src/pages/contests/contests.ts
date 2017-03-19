@@ -15,4 +15,16 @@ export class ContestsPage {
 			e => console.error(e)
 		);
 	}
+
+	showPlayers(contest: IContest): void {
+		console.log("Clicked " + contest.label);
+	}
+
+	formatTitle(contest: IContest): string {
+		let title = contest.sport + "&nbsp;" + contest.contestType;
+		if (contest.label) {
+			title += "&nbsp;" + contest.label.replace(/\-/g, "&#8209;");
+		}
+		return title;
+	}
 }

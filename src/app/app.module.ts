@@ -1,8 +1,10 @@
 import { AppComponent } from './app.component';
 import { ContestsPage } from '../pages/contests/contests';
-import { ContestsService } from "../services/contests.service";
+import { ContestsService } from '../services/contests.service';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { RouterModule } from '@angular/router';
+import { ROUTES } from './app.routes';
 
 @NgModule({
 	bootstrap: [
@@ -13,7 +15,8 @@ import { IonicErrorHandler, IonicModule } from 'ionic-angular';
 		ContestsPage
 	],
 	imports: [
-		IonicModule.forRoot(AppComponent)
+		IonicModule.forRoot(AppComponent),
+		RouterModule.forRoot(ROUTES)
 	],
 	providers: [
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },

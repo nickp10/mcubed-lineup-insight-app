@@ -18,8 +18,8 @@ export class ContestsService {
 
 	getContests(): Observable<IContest[]> {
 		if (!this.cache.contests) {
-			this.cache.contests = this.http.get(this.baseURL + "LineupAggregator").map<IContest[]>(
-				(response, index) => response.json()
+			this.cache.contests = this.http.get(this.baseURL + "LineupAggregator").map(
+				(response, index) => <IContest[]>response.json()
 			);
 		}
 		return this.cache.contests;
