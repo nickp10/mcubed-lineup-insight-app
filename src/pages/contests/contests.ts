@@ -17,13 +17,13 @@ export class ContestsPage {
 	}
 
 	showPlayers(contest: IContest): void {
-		console.log("Clicked " + contest.label);
+		console.log("Clicked " + contest.ID);
 	}
 
 	formatTitle(contest: IContest): string {
 		let title = contest.sport + "&nbsp;" + contest.contestType;
 		if (contest.label) {
-			title += "&nbsp;" + contest.label.replace(/\-/g, "&#8209;");
+			title += "&nbsp;" + contest.label.replace(/\-/g, "&#8209;").replace(/\s/g, "&nbsp;");
 		}
 		return title;
 	}

@@ -7,6 +7,10 @@
 	margin: 5px auto;
 	padding: 5px;
 	width: 99%;
+
+	&:hover {
+		background-color: #C5E9FB;
+	}
 }
 
 @mixin cell {

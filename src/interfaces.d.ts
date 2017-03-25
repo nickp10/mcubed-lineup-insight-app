@@ -1,6 +1,7 @@
 export interface IContest {
 	contestType: string;
 	games: IGame[];
+	ID: string;
 	label: string;
 	maxPlayersPerTeam: number;
 	maxSalaray: number;
