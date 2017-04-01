@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ContestsService } from "../../services/contests.service";
-import { IContest } from "../../interfaces";
+import { ContestsService } from '../../services/contests.service';
+import { IContest } from '../../interfaces';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'contests',
@@ -9,7 +10,7 @@ import { IContest } from "../../interfaces";
 export class ContestsPage {
 	contests: IContest[];
 
-	constructor(private contestsService: ContestsService) {
+	constructor(private contestsService: ContestsService, private router: Router) {
 		contestsService.getContests().subscribe(
 			c => this.contests = c,
 			e => console.error(e)
@@ -17,7 +18,7 @@ export class ContestsPage {
 	}
 
 	showPlayers(contest: IContest): void {
-		console.log("Clicked " + contest.ID);
+		this.router.navigate(["/players", contest.ID]);
 	}
 
 	formatTitle(contest: IContest): string {

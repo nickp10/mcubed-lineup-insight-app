@@ -3,6 +3,7 @@ import { ContestsPage } from '../pages/contests/contests';
 import { ContestsService } from '../services/contests.service';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { PlayersPage } from '../pages/players/players';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
 
@@ -12,7 +13,8 @@ import { ROUTES } from './app.routes';
 	],
 	declarations: [
 		AppComponent,
-		ContestsPage
+		ContestsPage,
+		PlayersPage
 	],
 	imports: [
 		IonicModule.forRoot(AppComponent),
