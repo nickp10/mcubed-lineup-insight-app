@@ -47,3 +47,8 @@ export interface IPlayerStats {
 	recentAveragePoints?: number;
 	seasonAveragePoints?: number;
 }
+
+export interface IPositionPlayerGroup {
+	players: IPlayer[];
+	position: string;
+}

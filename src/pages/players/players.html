@@ -1,127 +1,21 @@
 <ion-header>
 	<ion-toolbar no-border-top>
-		<ion-segment [(ngModel)]="position">
-			<ion-segment-button value="posP">
-				P
-			</ion-segment-button>
-			<ion-segment-button value="posC">
-				C
-			</ion-segment-button>
-			<ion-segment-button value="pos1B">
-				1B
-			</ion-segment-button>
-			<ion-segment-button value="pos2B">
-				2B
-			</ion-segment-button>
-			<ion-segment-button value="pos3B">
-				3B
-			</ion-segment-button>
-			<ion-segment-button value="posSS">
-				SS
-			</ion-segment-button>
-			<ion-segment-button value="posOF">
-				OF
+		<ion-segment [(ngModel)]="selectedPosition">
+			<ion-segment-button *ngFor="let positionPlayerGroup of positionPlayerGroups | async" value="{{positionPlayerGroup.position}}">
+				{{positionPlayerGroup.position}}
 			</ion-segment-button>
 		</ion-segment>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-	<div [ngSwitch]="position">
-		<ion-list *ngSwitchCase="'posP'">
-			<ion-item *ngFor="let player of players | async" >
-				<h2>{{player.name}}</h2>
-			</ion-item>
-		</ion-list>
-
-		<ion-list *ngSwitchCase="'posC'">
-			<ion-item>
-				<h2>Luna</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Milo</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Bandit</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Nala</h2>
-			</ion-item>
-		</ion-list>
-
-		<ion-list *ngSwitchCase="'pos1B'">
-			<ion-item>
-				<h2>Daffy</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Huey</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Dewey</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Louie</h2>
-			</ion-item>
-		</ion-list>
-
-		<ion-list *ngSwitchCase="'pos2B'">
-			<ion-item>
-				<h2>Daffy</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Huey</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Dewey</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Louie</h2>
-			</ion-item>
-		</ion-list>
-
-		<ion-list *ngSwitchCase="'pos3B'">
-			<ion-item>
-				<h2>Daffy</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Huey</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Dewey</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Louie</h2>
-			</ion-item>
-		</ion-list>
-
-		<ion-list *ngSwitchCase="'posSS'">
-			<ion-item>
-				<h2>Daffy</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Huey</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Dewey</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Louie</h2>
-			</ion-item>
-		</ion-list>
-
-		<ion-list *ngSwitchCase="'posOF'">
-			<ion-item>
-				<h2>Daffy</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Huey</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Dewey</h2>
-			</ion-item>
-			<ion-item>
-				<h2>Louie</h2>
-			</ion-item>
-		</ion-list>
+	<div [ngSwitch]="selectedPosition">
+		<ng-container *ngFor="let positionPlayerGroup of positionPlayerGroups | async">
+			<ion-list *ngSwitchCase="positionPlayerGroup.position">
+				<ion-item *ngFor="let player of positionPlayerGroup.players">
+					<h2>{{player.name}}</h2>
+				</ion-item>
+			</ion-list>
+		</ng-container>
 	</div>
 </ion-content>

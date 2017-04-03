@@ -3,6 +3,7 @@ import { IContest } from '../interfaces';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/publishReplay';
 
 interface IContestsCache {
 	contests?: Observable<IContest[]>;
@@ -20,7 +21,7 @@ export class ContestsService {
 		if (!this.cache.contests) {
 			this.cache.contests = this.http.get(this.baseURL + "LineupAggregator").map(
 				(response, index) => <IContest[]>response.json()
-			);
+			).publishReplay(1).refCount();
 		}
 		return this.cache.contests;
 	}
