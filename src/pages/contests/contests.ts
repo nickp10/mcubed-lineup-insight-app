@@ -11,7 +11,7 @@ export class ContestsPage {
 	contests: IContest[];
 
 	constructor(private contestsService: ContestsService, private router: Router) {
-		contestsService.getContests().subscribe(
+		this.contestsService.getContests().subscribe(
 			c => this.contests = c,
 			e => console.error(e)
 		);

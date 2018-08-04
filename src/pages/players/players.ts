@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ContestsService } from '../../services/contests.service';
 import { IContest, IPositionPlayerGroup, ITeam } from '../../interfaces';
 import { Observable } from 'rxjs/Observable';
-import { Segment } from 'ionic-angular/index';
+import { Segment } from '@ionic/angular';
 import 'rxjs/add/observable/zip';
 
 @Component({
@@ -20,14 +20,14 @@ export class PlayersPage {
 	private segment: Segment;
 
 	constructor(private activatedRoute: ActivatedRoute, private contestsService: ContestsService) {
-		this.contestID = activatedRoute.params.map(p => <string>p.id);
-		this.contest = Observable.zip(this.contestID, contestsService.getContests(), this.findFirstMatchingContest);
+		this.contestID = this.activatedRoute.params.map(p => <string>p.id);
+		this.contest = Observable.zip(this.contestID, this.contestsService.getContests(), this.findFirstMatchingContest);
 		this.positionPlayerGroups = this.contest.map(this.computePositionPlayers, this);
 		this.positionPlayerGroups.subscribe(
 			groups => {
 				setTimeout(() => {
 					if (this.segment) {
-						this.segment.ngAfterViewInit();
+						//this.segment.ngAfterViewInit();
 					}
 					this.selectedPosition = groups[0].position;
 				});

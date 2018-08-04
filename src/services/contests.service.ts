@@ -11,7 +11,6 @@ interface IContestsCache {
 
 @Injectable()
 export class ContestsService {
-	baseURL = "http://mcubed.ddns.net/mCubedServices/";
 	cache: IContestsCache = { };
 
 	constructor(private http: Http) {
@@ -19,7 +18,7 @@ export class ContestsService {
 
 	getContests(): Observable<IContest[]> {
 		if (!this.cache.contests) {
-			this.cache.contests = this.http.get(this.baseURL + "LineupAggregator").map(
+			this.cache.contests = this.http.get("/api").map(
 				(response, index) => <IContest[]>response.json()
 			).publishReplay(1).refCount();
 		}
