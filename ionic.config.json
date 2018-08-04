@@ -1,7 +1,8 @@
 {
-    "name": "mcubed-lineup-insight-app",
-    "app_id": "",
-    "integrations": { },
-    "type": "ionic-angular",
-    "typescript": true
+  "name": "mcubed-lineup-insight-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "typescript": true
 }
