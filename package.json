@@ -17,7 +17,7 @@
     "lint": "ng lint",
     "start": "ng serve",
     "test": "ng test",
-    "prepare": "npm run build"
+    "prepare": "npm run build && ionic cordova prepare"
   },
   "dependencies": {
     "@angular/common": "^6.1.1",
