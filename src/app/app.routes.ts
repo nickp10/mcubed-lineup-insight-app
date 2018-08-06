@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { ContestsPage } from '../pages/contests/contests';
-import { PlayersPage } from '../pages/players/players';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { ContestsPage } from "../pages/contests/contests";
+import { PlayersPage } from "../pages/players/players";
 
 const routes: Routes = [
     {
-        path: '',
+        path: "",
         component: ContestsPage
     },
     {
-        path: 'players/:id',
+        path: "players/:id",
         component: PlayersPage
     }
 ];

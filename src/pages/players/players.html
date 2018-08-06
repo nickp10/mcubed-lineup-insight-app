@@ -1,21 +1,21 @@
 <ion-header>
-	<ion-toolbar no-border-top>
-		<ion-segment [(ngModel)]="selectedPosition">
-			<ion-segment-button *ngFor="let positionPlayerGroup of positionPlayerGroups | async" value="{{positionPlayerGroup.position}}">
-				{{positionPlayerGroup.position}}
-			</ion-segment-button>
-		</ion-segment>
-	</ion-toolbar>
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="selectedPosition">
+            <ion-segment-button *ngFor="let positionPlayerGroup of positionPlayerGroups | async" value="{{positionPlayerGroup.position}}">
+                {{positionPlayerGroup.position}}
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-	<div [ngSwitch]="selectedPosition">
-		<ng-container *ngFor="let positionPlayerGroup of positionPlayerGroups | async">
-			<ion-list *ngSwitchCase="positionPlayerGroup.position">
-				<ion-item *ngFor="let player of positionPlayerGroup.players">
-					<h2>{{player.name}}</h2>
-				</ion-item>
-			</ion-list>
-		</ng-container>
-	</div>
+    <div [ngSwitch]="selectedPosition">
+        <ng-container *ngFor="let positionPlayerGroup of positionPlayerGroups | async">
+            <ion-list *ngSwitchCase="positionPlayerGroup.position">
+                <ion-item *ngFor="let player of positionPlayerGroup.players">
+                    <h2>{{player.name}}</h2>
+                </ion-item>
+            </ion-list>
+        </ng-container>
+    </div>
 </ion-content>
