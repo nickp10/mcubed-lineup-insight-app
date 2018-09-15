@@ -5,6 +5,7 @@ import { StatusBar } from "@ionic-native/status-bar";
 
 @Component({
     selector: "app-app",
+    styleUrls: ["app.component.scss"],
     templateUrl: "app.component.html"
 })
 export class AppComponent {

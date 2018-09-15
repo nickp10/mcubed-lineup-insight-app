@@ -1,4 +1,4 @@
-<div *ngFor="let contest of contests" class="contestBlock" (click)="showPlayers(contest)">
+<div *ngFor="let contest of contests | async" class="contestBlock" (click)="showPlayers(contest)">
     <div class="contestTitle" [innerHTML]="formatTitle(contest)"></div>
     <div class="contestDateTime">
         <div class="time">{{contest.startTime | date:'h:mma'}}</div>
