@@ -21,7 +21,7 @@ export class ContestsPage {
     }
 
     enumToString(value: any, enumerator: { [index: string]: any }): string {
-        if (isNaN(parseInt(value))) {
+        if (isNaN(parseInt(value, 10))) {
             return enumerator[enumerator[value]] || value;
         }
         return enumerator[value] || value;
