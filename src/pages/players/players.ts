@@ -1,18 +1,21 @@
 import { ActivatedRoute } from "@angular/router";
 import { Component, ViewChild } from "@angular/core";
 import { ContestsService } from "../../services/contests.service";
-import { IContest, IPositionPlayerGroup, ITeam } from "../../interfaces";
+import { IContest, IGame, IPlayer, IPositionPlayerGroup, ITeam } from "../../interfaces";
 import { Observable } from "rxjs/Observable";
 import { Segment } from "@ionic/angular";
-import "rxjs/add/observable/zip";
+import "rxjs/add/operator/mergeMap";
 
 @Component({
     selector: "app-players",
+    styleUrls: ["players.scss"],
     templateUrl: "players.html"
 })
 export class PlayersPage {
     contestID: Observable<string>;
     contest: Observable<IContest>;
+    games: Observable<IGame[]>;
+    players: Observable<IPlayer[]>;
     positionPlayerGroups: Observable<IPositionPlayerGroup[]>;
     selectedPosition: string;
 
@@ -21,8 +24,18 @@ export class PlayersPage {
 
     constructor(private activatedRoute: ActivatedRoute, private contestsService: ContestsService) {
         this.contestID = this.activatedRoute.params.map(p => <string>p.id);
-        this.contest = Observable.zip(this.contestID, this.contestsService.getContests(), this.findFirstMatchingContest);
-        this.positionPlayerGroups = this.contest.map(this.computePositionPlayers, this);
+        this.contest = this.contestID.mergeMap(contestID => {
+            return this.contestsService.getContests().map(contests => {
+                return contests.find(c => c.ID === contestID);
+            });
+        });
+        this.games = this.contest.map(contest => contest.games);
+        this.players = this.games.map(games => {
+            return games.
+                map(game => game.awayTeam.players.concat(game.homeTeam.players)).
+                reduce((playersA, playersB) => playersA.concat(playersB))
+        });
+        /*this.positionPlayerGroups = this.contest.map(this.computePositionPlayers, this);
         this.positionPlayerGroups.subscribe(
             groups => {
                 setTimeout(() => {
@@ -33,17 +46,7 @@ export class PlayersPage {
                 });
             },
             error => console.log(error)
-        );
-    }
-
-    findFirstMatchingContest(id: string, contests: IContest[]): IContest {
-        for (let i = 0; i < contests.length; i++) {
-            const contest = contests[i];
-            if (contest.ID === id) {
-                return contest;
-            }
-        }
-        return undefined;
+        );*/
     }
 
     computePositionPlayers(contest: IContest): IPositionPlayerGroup[] {
@@ -56,11 +59,11 @@ export class PlayersPage {
             }
         }
         const positionPlayerGroups = Object.keys(positionPlayerGroupsMap).map((key) => positionPlayerGroupsMap[key]);
-        positionPlayerGroups.sort((g1, g2) => {
+        /*positionPlayerGroups.sort((g1, g2) => {
             const i1 = contest.positions.indexOf(g1.position);
             const i2 = contest.positions.indexOf(g2.position);
             return i1 - i2;
-        });
+        });*/
         return positionPlayerGroups;
     }
 
