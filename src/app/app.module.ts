@@ -8,8 +8,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { IonicModule } from "@ionic/angular";
 import { NgModule } from "@angular/core";
 import { PlayersPage } from "../pages/players/players";
-import { StatusBar } from "@ionic-native/status-bar";
-import { SplashScreen } from "@ionic-native/splash-screen";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 
 @NgModule({
     bootstrap: [

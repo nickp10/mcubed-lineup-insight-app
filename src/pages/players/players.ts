@@ -3,7 +3,6 @@ import { Component, ViewChild } from "@angular/core";
 import { ContestsService } from "../../services/contests.service";
 import { IContest, IGame, IPlayer, IPositionPlayerGroup, ITeam } from "../../interfaces";
 import { Observable } from "rxjs/Observable";
-import { Segment } from "@ionic/angular";
 import "rxjs/add/operator/mergeMap";
 
 @Component({
@@ -18,10 +17,7 @@ export class PlayersPage {
     players: Observable<IPlayer[]>;
     positionPlayerGroups: Observable<IPositionPlayerGroup[]>;
     selectedPosition: string;
-
-    @ViewChild(Segment)
-    private segment: Segment;
-
+    
     constructor(private activatedRoute: ActivatedRoute, private contestsService: ContestsService) {
         this.contestID = this.activatedRoute.params.map(p => <string>p.id);
         this.contest = this.contestID.mergeMap(contestID => {
