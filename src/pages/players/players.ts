@@ -17,7 +17,7 @@ export class PlayersPage {
     players: Observable<IPlayer[]>;
     positionPlayerGroups: Observable<IPositionPlayerGroup[]>;
     selectedPosition: string;
-    
+
     constructor(private activatedRoute: ActivatedRoute, private contestsService: ContestsService) {
         this.contestID = this.activatedRoute.params.map(p => <string>p.id);
         this.contest = this.contestID.mergeMap(contestID => {
@@ -29,7 +29,7 @@ export class PlayersPage {
         this.players = this.games.map(games => {
             return games.
                 map(game => game.awayTeam.players.concat(game.homeTeam.players)).
-                reduce((playersA, playersB) => playersA.concat(playersB))
+                reduce((playersA, playersB) => playersA.concat(playersB));
         });
         /*this.positionPlayerGroups = this.contest.map(this.computePositionPlayers, this);
         this.positionPlayerGroups.subscribe(
