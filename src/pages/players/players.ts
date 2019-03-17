@@ -1,9 +1,11 @@
 import { ActivatedRoute } from "@angular/router";
 import { Component, ViewChild } from "@angular/core";
 import { ContestsService } from "../../services/contests.service";
-import { IContest, IGame, IPlayer, IPositionPlayerGroup, ITeam } from "../../interfaces";
+import { IContest, IGame, IPlayer, IPositionPlayerGroup, ITeam, IContestPosition } from "../../interfaces";
 import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/groupBy";
 import "rxjs/add/operator/mergeMap";
+import { GroupedObservable } from "rxjs";
 
 @Component({
     selector: "app-players",
@@ -13,10 +15,10 @@ import "rxjs/add/operator/mergeMap";
 export class PlayersPage {
     contestID: Observable<string>;
     contest: Observable<IContest>;
+    contestPositions: Observable<IContestPosition[]>;
     games: Observable<IGame[]>;
     players: Observable<IPlayer[]>;
-    positionPlayerGroups: Observable<IPositionPlayerGroup[]>;
-    selectedPosition: string;
+    selectedPosition: Observable<IContestPosition>;
 
     constructor(private activatedRoute: ActivatedRoute, private contestsService: ContestsService) {
         this.contestID = this.activatedRoute.params.map(p => <string>p.id);
@@ -25,58 +27,37 @@ export class PlayersPage {
                 return contests.find(c => c.ID === contestID);
             });
         });
+        this.contestPositions = this.contest.map(contest => this.distinctContestPositions(contest.positions));
         this.games = this.contest.map(contest => contest.games);
-        this.players = this.games.map(games => {
-            return games.
-                map(game => game.awayTeam.players.concat(game.homeTeam.players)).
-                reduce((playersA, playersB) => playersA.concat(playersB));
-        });
-        /*this.positionPlayerGroups = this.contest.map(this.computePositionPlayers, this);
-        this.positionPlayerGroups.subscribe(
-            groups => {
-                setTimeout(() => {
-                    if (this.segment) {
-                        // this.segment.ngAfterViewInit();
-                    }
-                    this.selectedPosition = groups[0].position;
-                });
-            },
-            error => console.log(error)
-        );*/
+        this.players = this.games.map(games => games
+            .map(game => game.awayTeam.players.concat(game.homeTeam.players))
+            .reduce((playersA, playersB) => playersA.concat(playersB))
+        );
     }
 
-    computePositionPlayers(contest: IContest): IPositionPlayerGroup[] {
-        const positionPlayerGroupsMap: { [index: string]: IPositionPlayerGroup } = { };
-        if (contest && contest.games) {
-            for (let i = 0; i < contest.games.length; i++) {
-                const game = contest.games[i];
-                this.addPositionPlayers(positionPlayerGroupsMap, game.awayTeam);
-                this.addPositionPlayers(positionPlayerGroupsMap, game.homeTeam);
-            }
-        }
-        const positionPlayerGroups = Object.keys(positionPlayerGroupsMap).map((key) => positionPlayerGroupsMap[key]);
-        /*positionPlayerGroups.sort((g1, g2) => {
-            const i1 = contest.positions.indexOf(g1.position);
-            const i2 = contest.positions.indexOf(g2.position);
-            return i1 - i2;
-        });*/
-        return positionPlayerGroups;
-    }
-
-    addPositionPlayers(positionPlayerGroupsMap: { [index: string]: IPositionPlayerGroup }, team: ITeam): void {
-        if (team && team.players) {
-            for (let i = 0; i < team.players.length; i++) {
-                const player = team.players[i];
-                let positionPlayerGroup = positionPlayerGroupsMap[player.position];
-                if (!positionPlayerGroup) {
-                    positionPlayerGroup = {
-                        players: [],
-                        position: player.position
-                    };
-                    positionPlayerGroupsMap[player.position] = positionPlayerGroup;
+    distinctContestPositions(positions: IContestPosition[]): IContestPosition[] {
+        const distinctPositions: IContestPosition[] = [];
+        if (positions) {
+            const map = new Map<string, boolean>();
+            for (const position of positions) {
+                if (!map.has(position.label)) {
+                    map.set(position.label, true);
+                    distinctPositions.push(position);
                 }
-                positionPlayerGroup.players.push(player);
             }
         }
+        return distinctPositions;
+    }
+
+    filterPlayersForPosition(position: IContestPosition, players: IPlayer[]): IPlayer[] {
+        const filteredPlayers: IPlayer[] = [];
+        if (position && position.eligiblePlayerPositions) {
+            for (const player of players) {
+                if (position.eligiblePlayerPositions.indexOf(player.position) > -1) {
+                    filteredPlayers.push(player);
+                }
+            }
+        }
+        return filteredPlayers;
     }
 }

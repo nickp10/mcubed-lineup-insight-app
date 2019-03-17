@@ -1,5 +1,25 @@
 players {
-    .toolbar-background {
-        background-color: #EDEDED;
+    .example-container {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .example-toolbar {
+        position: fixed;
+        z-index: 2;
+    }
+
+    .example-sidenav-container {
+        flex: 1 0 auto;
+        margin-top: 56px;
+    }
+
+    h1.example-app-name {
+        margin-left: 8px;
     }
 }
