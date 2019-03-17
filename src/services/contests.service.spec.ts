@@ -1,4 +1,4 @@
-import { async, TestBed } from "@angular/core/testing";
+import { async, inject, TestBed } from "@angular/core/testing";
 import { ContestsService } from "./contests.service";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
@@ -12,8 +12,7 @@ describe("ContestsService", () => {
         });
     }));
 
-    it("should create", () => {
-        const target: ContestsService = TestBed.get(ContestsService);
+    it("should create", inject([ContestsService], (target) => {
         expect(target).toBeTruthy();
-    });
+    }));
 });
