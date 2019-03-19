@@ -65,11 +65,6 @@ export interface IPlayerStats {
     seasonAveragePoints?: number;
 }
 
-export interface IPositionPlayerGroup {
-    players: IPlayer[];
-    position: string;
-}
-
 export enum ContestType {
     DraftKings = 1,
     FanDuel,

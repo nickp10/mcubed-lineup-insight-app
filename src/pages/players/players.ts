@@ -1,11 +1,13 @@
 import { ActivatedRoute } from "@angular/router";
+import { BehaviorSubject } from "rxjs";
 import { Component, ViewChild } from "@angular/core";
 import { ContestsService } from "../../services/contests.service";
-import { IContest, IGame, IPlayer, IPositionPlayerGroup, ITeam, IContestPosition } from "../../interfaces";
+import { IContest, IGame, IPlayer, IContestPosition } from "../../interfaces";
 import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/combineLatest";
 import "rxjs/add/operator/groupBy";
 import "rxjs/add/operator/mergeMap";
-import { GroupedObservable } from "rxjs";
+import { MatSidenav } from "@angular/material";
 
 @Component({
     selector: "app-players",
@@ -13,26 +15,37 @@ import { GroupedObservable } from "rxjs";
     templateUrl: "players.html"
 })
 export class PlayersPage {
-    contestID: Observable<string>;
-    contest: Observable<IContest>;
-    contestPositions: Observable<IContestPosition[]>;
-    games: Observable<IGame[]>;
-    players: Observable<IPlayer[]>;
-    selectedPosition: Observable<IContestPosition>;
+    contestID$: Observable<string>;
+    contest$: Observable<IContest>;
+    contestPositions$: Observable<IContestPosition[]>;
+    games$: Observable<IGame[]>;
+    players$: Observable<IPlayer[]>;
+    selectedPosition$: Observable<IContestPosition>;
+    selectedPlayers$: Observable<IPlayer[]>;
+    userSelectedPosition$: BehaviorSubject<IContestPosition>;
+
+    @ViewChild("snav") snav: MatSidenav;
 
     constructor(private activatedRoute: ActivatedRoute, private contestsService: ContestsService) {
-        this.contestID = this.activatedRoute.params.map(p => <string>p.id);
-        this.contest = this.contestID.mergeMap(contestID => {
+        this.contestID$ = this.activatedRoute.params.map(p => <string>p.id);
+        this.contest$ = this.contestID$.mergeMap(contestID => {
             return this.contestsService.getContests().map(contests => {
                 return contests.find(c => c.ID === contestID);
             });
         });
-        this.contestPositions = this.contest.map(contest => this.distinctContestPositions(contest.positions));
-        this.games = this.contest.map(contest => contest.games);
-        this.players = this.games.map(games => games
+        this.contestPositions$ = this.contest$.map(contest => this.distinctContestPositions(contest.positions));
+        this.games$ = this.contest$.map(contest => contest.games);
+        this.players$ = this.games$.map(games => games
             .map(game => game.awayTeam.players.concat(game.homeTeam.players))
             .reduce((playersA, playersB) => playersA.concat(playersB))
         );
+        this.userSelectedPosition$ = new BehaviorSubject<IContestPosition>(undefined);
+        this.selectedPosition$ = this.userSelectedPosition$.combineLatest(this.contestPositions$, (userSelectedPosition, contestPositions) => {
+            return userSelectedPosition || contestPositions[0];
+        });
+        this.selectedPlayers$ = this.selectedPosition$.combineLatest(this.players$, (selectedPosition, players) => {
+            return this.sortPlayers(this.filterPlayersForPosition(selectedPosition, players));
+        });
     }
 
     distinctContestPositions(positions: IContestPosition[]): IContestPosition[] {
@@ -59,5 +72,21 @@ export class PlayersPage {
             }
         }
         return filteredPlayers;
+    }
+
+    sortPlayers(players: IPlayer[]): IPlayer[] {
+        return players.sort((playerA, playerB) => {
+            const salarySort = playerB.salary - playerA.salary;
+            if (salarySort === 0) {
+                return playerA.name.localeCompare(playerB.name);
+            } else {
+                return salarySort;
+            }
+        });
+    }
+
+    setSelectedPosition(position: IContestPosition): void {
+        this.userSelectedPosition$.next(position);
+        this.snav.close();
     }
 }
