@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "baseUrl": ".",
         "declaration": false,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
@@ -9,6 +10,9 @@
         ],
         "moduleResolution": "node",
         "outDir": "./dist/out-tsc",
+        "paths": {
+            "core-js/es7/reflect": ["../node_modules/core-js/proposals/reflect-metadata"]
+        },
         "removeComments": true,
         "sourceMap": true,
         "target": "es5"
