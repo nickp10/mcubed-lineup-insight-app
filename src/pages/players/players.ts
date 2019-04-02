@@ -40,8 +40,8 @@ export class PlayersPage {
             .reduce((playersA, playersB) => playersA.concat(playersB))
         );
         this.userSelectedPosition$ = new BehaviorSubject<IContestPosition>(undefined);
-        this.selectedPosition$ = this.userSelectedPosition$.combineLatest(this.contestPositions$, (userSelectedPosition, contestPositions) => {
-            return userSelectedPosition || contestPositions[0];
+        this.selectedPosition$ = this.userSelectedPosition$.combineLatest(this.contestPositions$, (userPosition, contestPositions) => {
+            return userPosition || contestPositions[0];
         });
         this.selectedPlayers$ = this.selectedPosition$.combineLatest(this.players$, (selectedPosition, players) => {
             return this.sortPlayers(this.filterPlayersForPosition(selectedPosition, players));

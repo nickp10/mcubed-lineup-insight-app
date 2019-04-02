@@ -55,7 +55,7 @@
     "@angular/compiler-cli": "^7.2.11",
     "@ionic/lab": "^1.0.24",
     "@types/jasmine": "^3.3.12",
-    "@types/node": "^11.12.2",
+    "@types/node": "^11.13.0",
     "codelyzer": "^5.0.0",
     "jasmine-core": "^3.3.0",
     "karma": "^4.0.1",
@@ -63,7 +63,7 @@
     "karma-coverage-istanbul-reporter": "^2.0.5",
     "karma-jasmine": "^2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
-    "tslint": "^5.14.0",
+    "tslint": "^5.15.0",
     "typescript": "^3.2.4"
   },
   "cordova": {
