@@ -1,3 +1,4 @@
+import { AndroidPermissions } from "@ionic-native/android-permissions/ngx";
 import { AppComponent } from "./app.component";
 import { AppRoutes } from "./app.routes";
 import { BrowserModule } from "@angular/platform-browser";
@@ -35,6 +36,7 @@ import { SplashScreen } from "@ionic-native/splash-screen/ngx";
         IonicModule.forRoot()
     ],
     providers: [
+        AndroidPermissions,
         ContestsService,
         StatusBar,
         SplashScreen
