@@ -1,27 +1,32 @@
-<div class="mat-app-background example-container">
-    <mat-toolbar color="primary" class="example-toolbar">
-        <button mat-icon-button (click)="snav.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <h1 class="example-app-name">Responsive App</h1>
-    </mat-toolbar>
+<mat-toolbar color="primary" class="app-toolbar">
+    <button mat-icon-button class="toolbar-nav-toggle" (click)="positionNav.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="toolbar-title">mCubed Lineup Insight</h1>
+</mat-toolbar>
 
-    <mat-sidenav-container class="example-sidenav-container">
-        <mat-sidenav #snav [mode]="over" [fixedInViewport]="true" fixedTopGap="112">
-            <mat-nav-list>
-                <ng-container *ngFor="let contestPosition of contestPositions$ | async">
-                    <ng-container *ngIf="selectedPosition$ | async as selectedPosition">
-                        <a mat-list-item (click)="setSelectedPosition(contestPosition)" [class.selected]="selectedPosition === contestPosition">{{contestPosition.label}}</a>
-                    </ng-container>
+<mat-sidenav-container class="app-toolbar-offset">
+    <mat-sidenav #positionNav [mode]="over" [fixedInViewport]="true" fixedTopGap="64">
+        <mat-nav-list class="position-list">
+            <ng-container *ngFor="let contestPosition of contestPositions$ | async">
+                <ng-container *ngIf="selectedPosition$ | async as selectedPosition">
+                    <a mat-list-item (click)="setSelectedPosition(contestPosition)" [class.selected]="selectedPosition === contestPosition">{{contestPosition.label}}</a>
                 </ng-container>
-            </mat-nav-list>
-        </mat-sidenav>
+            </ng-container>
+        </mat-nav-list>
+    </mat-sidenav>
 
-        <mat-sidenav-content>
-            <div *ngFor="let player of selectedPlayers$ | async">
-                <h2>{{player.name}}</h2>
-                {{player.salary}}
-            </div>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-</div>
+    <mat-sidenav-content>
+        <mat-list class="player-list">
+            <mat-list-item *ngFor="let player of selectedPlayers$ | async; last as last" class="player-block app-list-item">
+                <p mat-line>{{player.name}}</p>
+                <span class="player-spacer"></span>
+                <div>
+                    <div class="player-salary">{{player.salary | currency:'USD':true:'1.0-0'}}</div>
+                    <div class="player-projection">{{(player.projectedPoints | number:'1.1-2') || "0.0"}}</div>
+                </div>
+                <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+            </mat-list-item>
+        </mat-list>
+    </mat-sidenav-content>
+</mat-sidenav-container>

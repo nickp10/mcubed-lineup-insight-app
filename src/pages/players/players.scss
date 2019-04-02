@@ -1,27 +1,30 @@
-.example-container {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.toolbar-nav-toggle {
+    margin-right: 5px;
 }
 
-.example-toolbar {
-    position: fixed;
-    z-index: 2;
+.position-list, .player-list {
+    padding: 0;
 }
 
-.example-sidenav-container {
-    flex: 1 0 auto;
-    margin-top: 64px;
+.position-list {
+    .selected {
+        background-color: #C5E9FB;
+    }
 }
 
-h1.example-app-name {
-    margin-left: 8px;
+.player-block {
+    font-size: 18px;
 }
 
-.selected {
-    background-color: pink;
+.player-spacer {
+    flex: 1 1 auto;
+}
+
+.player-salary {
+    text-align: right;
+}
+
+.player-projection {
+    font-weight: bold;
+    text-align: right;
 }

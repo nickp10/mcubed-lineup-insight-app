@@ -1,7 +1,14 @@
-<div *ngFor="let contest of contests | async" class="contestBlock" (click)="showPlayers(contest)">
-    <div class="contestTitle" [innerHTML]="formatTitle(contest)"></div>
-    <div class="contestDateTime">
-        <div class="time">{{contest.startTime | date:'h:mma'}}</div>
-        <div class="date">{{contest.startTime | date:'MMM d'}}</div>
-    </div>
-</div>
+<mat-toolbar color="primary" class="app-toolbar">
+    <h1 class="toolbar-title">mCubed Lineup Insight</h1>
+</mat-toolbar>
+<mat-list class="app-toolbar-offset contest-list">
+    <mat-list-item *ngFor="let contest of contests | async; last as last" class="contest-block app-list-item" (click)="showPlayers(contest)">
+        <p mat-line [innerHTML]="formatTitle(contest)"></p>
+        <span class="contest-spacer"></span>
+        <div>
+            <div class="contest-time">{{contest.startTime | date:'h:mma'}}</div>
+            <div class="contest-date">{{contest.startTime | date:'MMM&nbsp;d'}}</div>
+        </div>
+        <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+    </mat-list-item>
+</mat-list>

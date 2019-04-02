@@ -1,33 +1,25 @@
-.contestBlock {
-    background-color: white;
-    border: 1px solid black;
+.contest-list {
+    padding: 0;
+}
+
+.contest-block {
     cursor: pointer;
-    display: table;
     font-size: 18px;
-    margin: 5px auto;
-    padding: 5px;
-    width: 99%;
 
     &:hover {
         background-color: #C5E9FB;
     }
 }
 
-@mixin cell {
-    display: table-cell;
-    vertical-align: middle;
+.contest-spacer {
+    flex: 1 1 auto;
 }
 
-.contestTitle {
-    @include cell;
-    width: 1px;
-}
-
-.contestDateTime {
-    @include cell;
+.contest-time {
+    font-weight: bold;
     text-align: right;
+}
 
-    .time {
-        font-weight: bold;
-    }
+.contest-date {
+    text-align: right;
 }
