@@ -7,6 +7,7 @@ import { ContestsPage } from "../pages/contests/contests";
 import { ContestsService } from "../services/contests.service";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { HTTP } from "@ionic-native/http/ngx";
 import { IonicModule } from "@ionic/angular";
 import { MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule } from "@angular/material";
 import { NgModule } from "@angular/core";
@@ -38,6 +39,7 @@ import { SplashScreen } from "@ionic-native/splash-screen/ngx";
     providers: [
         AndroidPermissions,
         ContestsService,
+        HTTP,
         StatusBar,
         SplashScreen
     ]
