@@ -24,7 +24,7 @@ export class PlayersPage {
     selectedPlayers$: Observable<IPlayer[]>;
     userSelectedPosition$: BehaviorSubject<IContestPosition>;
 
-    @ViewChild("positionNav") positionNav: MatSidenav;
+    @ViewChild("positionNav", { static: false }) positionNav: MatSidenav;
 
     constructor(private activatedRoute: ActivatedRoute, private contestsService: ContestsService) {
         this.contestID$ = this.activatedRoute.params.map(p => <string>p.id);
