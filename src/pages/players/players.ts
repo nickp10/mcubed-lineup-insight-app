@@ -7,7 +7,7 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/combineLatest";
 import "rxjs/add/operator/groupBy";
 import "rxjs/add/operator/mergeMap";
-import { MatSidenav } from "@angular/material";
+import { MatSidenav } from "@angular/material/sidenav";
 
 @Component({
     selector: "app-players",
